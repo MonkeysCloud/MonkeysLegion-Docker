@@ -1,0 +1,28 @@
+# ── Environment files ─────────────────────────────────────────────────────────
+.env
+.env.*.local
+
+# ── Docker overrides & local data ────────────────────────────────────────────
+docker-compose.override.yml
+docker/data/
+.docker/
+
+# ── OS metadata ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE + editor ─────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*~
+
+# ── Temporary files & logs ────────────────────────────────────────────────────
+tmp/
+temp/
+*.log
+
+# ── Archive & build artifacts ─────────────────────────────────────────────────
+*.tar
+build/
+dist/
