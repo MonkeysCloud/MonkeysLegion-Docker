@@ -17,10 +17,8 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring intl opcache bcmath exif gd xm
 # -------- Composer ----------
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
-# -------- Non-root runtime user ----------
-RUN addgroup -g 82 -S www && adduser -u 82 -D -S -G www www
 WORKDIR /var/www/html
-COPY --chown=www:www . .
+COPY --chown=www-data:www-data . .
 
 # -------- Nginx ----------
 COPY docker/nginx.conf /etc/nginx/nginx.conf
@@ -36,6 +34,6 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
 COPY --chown=root:root docker/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
-USER www
+USER www-data
 
 ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
