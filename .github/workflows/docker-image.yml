@@ -44,4 +44,6 @@ jobs:
             BASE_TAG=8.4-fpm-alpine
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/monkeyscloud/monkeyslegion:${{ steps.meta.outputs.tag }}
+          tags: |
+            ghcr.io/monkeyscloud/monkeyslegion:${{ steps.meta.outputs.tag }}
+            ghcr.io/monkeyscloud/monkeyslegion:latest
