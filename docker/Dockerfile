@@ -23,6 +23,10 @@ COPY --chown=www-data:www-data . .
 # -------- Nginx ----------
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
+# Ensure nginx can write logs and PID files
+RUN mkdir -p /var/log/nginx /var/run \
+    && chown -R www-data:www-data /var/log/nginx /var/run
+
 # -------- Healthcheck ----------
 COPY docker/healthcheck.sh /usr/local/bin/healthcheck
 RUN chmod +x /usr/local/bin/healthcheck
@@ -34,6 +38,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
 COPY --chown=root:root docker/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 80
-USER www-data
+# Run as root so nginx can bind to :80
+USER root
 
 ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
