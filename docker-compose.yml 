@@ -7,12 +7,6 @@ services:
         BASE_TAG: 8.4-fpm-alpine
     volumes:
       - .:/var/www/html
-    environment:
-      APP_ENV: dev
-      DB_HOST: db
-      DB_DATABASE: monkeyslegion
-      DB_USERNAME: ml
-      DB_PASSWORD: secret
     ports:
       - "8080:80"
     depends_on:
